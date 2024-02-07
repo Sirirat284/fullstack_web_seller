@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: hsl(0, 0%, 100%);
+            color: #000000;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: #000000;
+        }
+        form {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+        input[type=text], select, input[type="email"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            width: calc(100% - 170px); /* ลบความกว้างของ label และ margin */
+        }
+        input[type="number"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            width: 120px; /* ลบความกว้างของ label และ margin */
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            opacity: 1;
+        }
+        textarea {
+        width: 100%; /* กำหนดความกว้าง */
+        height: 150px; /* กำหนดความสูง */
+        border: 1px solid #ddd;
+        }
+        input[type=submit], input[type=reset] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50; /* Green background */
+            color: white;
+            margin: 10px 0; /* กำหนด margin ให้เหมือนเดิม */
+        }
+        input[type=submit], input[type=reset] {
+            cursor: pointer;
+            margin-right: 0; /* ลบ margin ขวาออกเพื่อให้ align กับองค์ประกอบอื่นๆ */
+        }
+        input[type=submit] {
+            background-color: #4CAF50;
+        }
+        input[type=reset] {
+            background-color: #f44336;
+        }
+        /* Hover effect for the 'ยืนยัน' button */
+        input[type=submit]:hover {
+            background-color: #367a39; /* สีเขียวที่เข้มขึ้นเมื่อ hover */
+            transition: background-color 0.3s ease-in-out;
+        }
+        /* Hover effect for the 'ยกเลิก' button */
+        input[type=reset]:hover {
+            background-color: #c13832; /* สีแดงที่เข้มขึ้นเมื่อ hover */
+            transition: background-color 0.3s ease-in-out;
+        }
+        .form-group {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center; /* ให้ตรงกันในแนวตั้ง */
+        }
+        label {
+            flex: 0 0 150px; /* กำหนดขนาดคงที่สำหรับ label */
+            text-align: right;
+            margin-right: 10px;
+        }
+        .form-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Focus effect for inputs and select */
+        input[type="text"]:focus, select:focus, input[type="email"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        /* Style the upload wrapper */
+        .upload-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center align items */
+            gap: 10px; /* Spacing between elements */
+            margin-left: 170px;
+        }
+
+        .upload-wrapper label {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 1px; /* Reduced padding */
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .upload-wrapper label:hover {
+            background-color: #367a39; /* สีเมื่อ hover */
+        }
+
+        .upload-wrapper input[type='file'] {
+            display: none; /* ซ่อน input file เดิม */
+        }
+
+        /* Style for displaying the file name */
+        .file-name {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px 20px;
+            width: auto; /* Auto width based on content */
+            min-width: 150px; /* Minimum width */
+            max-width: 300px; /* Maximum width */
+            text-align: center; /* Center text */
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            background-color: #f9f9f9;
+        }
+   
+    </style>
+    
+</head>
+<body>
+    <center>
+        <h1>เพิ่มข้อมูลที่ลูกค้าต้องการ</h1> 
+        <hr color=black>
+        <form method="post" action="../controller/insert_product.php" enctype="multipart/form-data">
+            <div>
+                <div class="upload-wrapper">
+                    <span class="file-name">No file chosen</span>
+                    <label for="a1">Choose File</label>
+                    <input id="a1" type="file" name="image" accept="image/*" onchange="updateFileName(this)">
+                </div>
+                <div class="form-group">
+                    <label for="a2">ชื่อสินค้า:</label>
+                    <input id="a2" type="text"  name="prodName" maxlength="99">
+                </div>               
+                <div class="form-group">
+                    <label for="a3">ประเภทสินค้า:</label>
+                    <select id="a3" name="prodtype">
+                        <option value="Laptop">โน๊ตบุ๊ค</option>
+                        <option value="PC">คอมพิวเตอร์ พีซี</option>
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label for="a4">ยี่ห้อ:</label>
+                    <select id="a4" name="brand">
+                        <option value="asus">Asus</option>
+                        <option value="acer">Acer</option>
+                        <option value="apple">Apple</option>
+                        <option value="dell">Dell</option>
+                        <option value="lenovo">Lenovo</option>
+                        <option value="msi">MSI</option>
+                        <option value="hp">HP</option>
+                    </select>
+                </div> 
+                <div class="form-group">
+                    <label for="a5">รายละเอียด:</label>
+                    <textarea id="a5" name="detail" rows="4" cols="50" maxlength="200"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="a6">จำนวน:</label>
+                    <input id="a6" type="number"   name="amount" min="0" max="100" step="1">
+                </div>
+                <div class="form-group">
+                    <label for="a7">ราคา:</label>
+                    <input id="a7" type="number"   name="price" min="0" max="999999" step="1">
+                </div>
+                <div class="form-controls">
+                    <input type="submit" value="ยืนยัน">
+                    <input type="reset" value="ยกเลิก">
+                </div>
+            </div>
+        </form>
+    </center>
+    <script>
+        function updateFileName(input) {
+            var fileName = input.files && input.files.length > 0 ? input.files[0].name : "No file chosen";
+            document.querySelector('.file-name').textContent = fileName;
+        }
+    </script>
+</body>
+</html>
