@@ -96,6 +96,7 @@
             </div>
         </body>
         ";
+        echo "<hr/>";
         echo "<div class='product-grid'>";
         $count = 0;
         while ($row = $result->fetch_assoc()) {

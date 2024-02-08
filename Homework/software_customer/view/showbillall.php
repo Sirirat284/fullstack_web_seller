@@ -82,6 +82,7 @@ if($result){
         <th width='150px'>วันที่สั่ง</th>
         <th width='150px'>สถานะ</th>
         <th width='120px'></th>
+    
 
     </tr>";
     $count = 0;
@@ -100,9 +101,13 @@ if($result){
         <td>$customer_name</td>
         <td>$shipping_name</td>
         <td>$payment_name</td>
-        <td>$order_date</td>
-        <td>$status</td>
-        <td>
+        <td>$order_date</td>";
+        if ($status == "จัดส่งสำเร็จ") {
+            echo "<td style='color: #4CAF50; font-weight: bold;'>$status</td>";
+        } else {
+            echo "<td>$status</td>";
+        }
+        echo "<td>
         <form method='get' action='detailbill.php'>
             <input type='hidden' name='headID' value='$headID'>
             <input type='submit' class='detail-link' value='รายละเอียด>>' style='background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;'>
@@ -111,6 +116,7 @@ if($result){
         </tr>";
     }
     echo "</table>";
+    echo "<br/>";
     require '../controlbar/footer.html';
 }else{
     echo "Error: " . $conn->error;
