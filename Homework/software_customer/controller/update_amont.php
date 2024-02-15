@@ -43,7 +43,7 @@ if ($stmt->execute()) {
         }
 
         function goToCart() {
-            window.location.href = '../view/showorderall.php'; // แทนที่ด้วย URL ของหน้าตระก้าสินค้า
+            window.location.href = '../view/showbasketall.php'; // แทนที่ด้วย URL ของหน้าตระก้าสินค้า
         }
     </script>";
 }else {
