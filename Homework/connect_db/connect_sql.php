@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost:3306";
 $username = "root";
-$password = "bew224002544";
+$password = "";
 $dbname = "fullstack_cust_and_prod_service";
 
 // Create connection
